@@ -1,5 +1,6 @@
+import LoginComponent from "../features/User/LoginComponent";
 const Login = () => {
-  return <div>Login</div>;
+  return <LoginComponent />;
 };
 
 export default Login;
