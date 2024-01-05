@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
   const [username, setUserName] = useState();
@@ -11,7 +12,10 @@ const Register = () => {
     if (!username || !email || !password) {
       toast.error("Fill in all require Fields");
     }
-    console.log(username, email, password);
+    axios
+      .post("", { username, email, password })
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
