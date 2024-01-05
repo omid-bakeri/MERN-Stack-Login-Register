@@ -1,11 +1,11 @@
-import HomeComponent from "../features/Home/HomeComponent";
-import SlideShow from "../features/SlideShow/SlideShow";
+import HomeComponent from "../features/Home/HeaderComponent";
+// import SlideShow from "../features/SlideShow/SlideShow";
 
 const Home = () => {
   return (
     <>
       <HomeComponent />
-      <SlideShow />
+      {/* <SlideShow /> */}
     </>
   );
 };

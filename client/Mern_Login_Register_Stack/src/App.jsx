@@ -5,6 +5,10 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Services from "./pages/Services";
+import Pricing from "./pages/Pricing";
+import Contact from "./pages/Contact";
+
 const App = () => {
   return (
     <React.Fragment>
@@ -13,6 +17,9 @@ const App = () => {
           <Route index element={<Navigate replace to="Home" />} />
           <Route path="home" element={<Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="contact-us" element={<Contact />} />
+          <Route path="pricing" element={<Pricing />} />
+          <Route path="services" element={<Services />} />
           <Route path="register" element={<Register />} />
         </Routes>
       </BrowserRouter>
