@@ -1,4 +1,15 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 const LoginComponent = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const handleSubmitLogin = () => {
+    if (!email || !password) {
+      toast.error("Fill in all require Fields");
+    }
+  };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -18,12 +29,18 @@ const LoginComponent = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Login in Site
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form
+              onSubmit={(e) => handleSubmitLogin(e.preventDefault())}
+              className="space-y-4 md:space-y-6"
+              action="#"
+            >
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Your email
+                  Your email <span className="text-red-500">*</span>
                 </label>
                 <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   name="email"
                   id="email"
@@ -34,9 +51,11 @@ const LoginComponent = () => {
               </div>
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Password
+                  Password <span className="text-red-500">*</span>
                 </label>
                 <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   name="password"
                   id="password"
@@ -60,20 +79,19 @@ const LoginComponent = () => {
                   <div className="text-white">Remember me</div>
                 </div>
               </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
+              <button className="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                 Login
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Already have an account?{" "}
-                <a
-                  href="#"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Login here
-                </a>
+                Dont have any Account?{" "}
+                <Link to="/register">
+                  <a
+                    href="#"
+                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  >
+                    Register
+                  </a>
+                </Link>
               </p>
             </form>
           </div>
