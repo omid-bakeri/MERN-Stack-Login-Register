@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const employeeSchema = new mongoose.Schema({
-  name: String,
+  username: String,
   email: String,
   password: String,
 });

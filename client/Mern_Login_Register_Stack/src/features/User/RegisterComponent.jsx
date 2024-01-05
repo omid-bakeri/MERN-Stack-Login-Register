@@ -7,6 +7,8 @@ const Register = () => {
   const [username, setUserName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [result, setResult] = useState();
+  const [error, setError] = useState();
 
   const handleSubmitForm = () => {
     if (!username || !email || !password) {
@@ -18,8 +20,18 @@ const Register = () => {
         email,
         password,
       })
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err));
+      .then((result) => setResult(result))
+      .catch((err) => {
+        console.log(err);
+        setError(error);
+      });
+
+    if (result.status == 200 && result.statusText == "OK") {
+      toast.success("Successfully Created Your Accout");
+    }
+    if (error) {
+      console.log(error);
+    }
   };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
