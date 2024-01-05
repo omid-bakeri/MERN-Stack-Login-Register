@@ -13,7 +13,11 @@ const Register = () => {
       toast.error("Fill in all require Fields");
     }
     axios
-      .post("", { username, email, password })
+      .post("http://localhost:8000/api/register", {
+        username,
+        email,
+        password,
+      })
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
   };
