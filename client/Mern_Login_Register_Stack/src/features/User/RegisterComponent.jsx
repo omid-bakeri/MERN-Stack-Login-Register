@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [username, setUserName] = useState();
@@ -10,6 +11,8 @@ const Register = () => {
   const [result, setResult] = useState();
   const [error, setError] = useState();
 
+  // eslint-disable-next-line no-unused-vars
+  const navigate = useNavigate();
   const handleSubmitForm = () => {
     if (!username || !email || !password) {
       toast.error("Fill in all require Fields");
@@ -27,7 +30,7 @@ const Register = () => {
       });
 
     if (result.status == 200 && result.statusText == "OK") {
-      toast.success("Successfully Created Your Accout");
+      toast.success("Successfully Created Your Accout Please Login");
     }
     if (error) {
       console.log(error);

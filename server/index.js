@@ -1,15 +1,18 @@
 const express = require("express");
 const cors = require("cors");
 const router = require("./router");
+const cookieParser = require("cookie-parser");
 const { default: mongoose } = require("mongoose");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
+dotenv.config();
 
-
-
-mongoose.connect("mongodb://127.0.0.1:27017/employee");
+mongoose.connect(process.env.MONGO_URL);
 
 const port = 8000;
 
