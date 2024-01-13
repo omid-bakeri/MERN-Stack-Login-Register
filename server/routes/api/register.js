@@ -1,8 +1,15 @@
 const EmployeeModel = require("../../model/EmployeeModel");
-exports.postRegister = (req, res) => {
+const bcrypt = require("bcryptjs");
 
-  
-  EmployeeModel.create(req.body)
-    .then((employees) => res.json(employees))
-    .catch((err) => console.error(err));
+exports.postRegister = (req, res) => {
+  const { username, email, password } = req.body;
+
+  bcrypt
+    .hash(password, 10)
+    .then((hash) => {
+      EmployeeModel.create({ username, email, password: hash })
+        .then((user) => res.json({ status: "SUCCESS" }))
+        .catch((err) => res.json(err));
+    })
+    .catch((err) => res.json(err));
 };

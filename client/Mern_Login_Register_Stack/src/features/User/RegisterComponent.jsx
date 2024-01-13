@@ -8,12 +8,14 @@ const Register = () => {
   const [username, setUserName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  // eslint-disable-next-line no-unused-vars
   const [result, setResult] = useState();
   const [error, setError] = useState();
 
   // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
-  const handleSubmitForm = () => {
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
     if (!username || !email || !password) {
       toast.error("Fill in all require Fields");
     }
@@ -23,7 +25,7 @@ const Register = () => {
         email,
         password,
       })
-      .then((result) => setResult(result))
+      .then((result) => console.log(result))
       .catch((err) => {
         console.log(err);
         setError(error);
@@ -58,7 +60,7 @@ const Register = () => {
               Create and account
             </h1>
             <form
-              onSubmit={(e) => handleSubmitForm(e.preventDefault())}
+              onSubmit={handleSubmitForm}
               className="space-y-4 md:space-y-6"
               action="#"
             >
