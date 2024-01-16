@@ -1,13 +1,43 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 const LoginComponent = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
-  const handleSubmitLogin = () => {
+  const [data, setData] = useState();
+  const [error, setError] = useState();
+  const handleSubmitLogin = (e) => {
+    e.preventDefault();
     if (!email || !password) {
       toast.error("Fill in all require Fields");
+    }
+
+    axios
+      .post("http://localhost:8000/api/login", {
+        email,
+        password,
+      })
+      .then((result) => setData(result))
+      .catch((err) => {
+        console.log(err);
+        setError(err);
+      });
+
+    if (data && data.data.status == "SUCCESS") {
+      toast.success("Successfully Created Your Accout Please Login");
+      const setTime = async () => {
+        await setTimeout(() => {
+          navigate("/Home");
+        }, 3000);
+      };
+      setTime();
+    }
+    if (error) {
+      console.log(error);
     }
   };
   return (
@@ -32,7 +62,7 @@ const LoginComponent = () => {
               Login in Site
             </h1>
             <form
-              onSubmit={(e) => handleSubmitLogin(e.preventDefault())}
+              onSubmit={handleSubmitLogin}
               className="space-y-4 md:space-y-6"
               action="#"
             >

@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+// import { useQuery } from "@tanstack/react-query";
 
 const Register = () => {
   const [username, setUserName] = useState();
@@ -16,6 +17,7 @@ const Register = () => {
 
   // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
+
   const handleSubmitForm = (e) => {
     e.preventDefault();
     if (!username || !email || !password) {
@@ -30,17 +32,23 @@ const Register = () => {
       .then((result) => setData(result))
       .catch((err) => {
         console.log(err);
-        setError(error);
+        setError(err);
       });
 
-    console.log(data);
-    if (data.data.status == "SUCCESS") {
+    if (data && data.data.status == "SUCCESS") {
       toast.success("Successfully Created Your Accout Please Login");
+      const setTime = async () => {
+        await setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      };
+      setTime();
     }
     if (error) {
       console.log(error);
     }
   };
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
