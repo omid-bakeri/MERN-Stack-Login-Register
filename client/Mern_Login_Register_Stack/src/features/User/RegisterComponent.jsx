@@ -12,6 +12,8 @@ const Register = () => {
   const [result, setResult] = useState();
   const [error, setError] = useState();
 
+  const [data, setData] = useState();
+
   // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
   const handleSubmitForm = (e) => {
@@ -25,13 +27,14 @@ const Register = () => {
         email,
         password,
       })
-      .then((result) => console.log(result))
+      .then((result) => setData(result))
       .catch((err) => {
         console.log(err);
         setError(error);
       });
 
-    if (result.status == 200 && result.statusText == "OK") {
+    console.log(data);
+    if (data.data.status == "SUCCESS") {
       toast.success("Successfully Created Your Accout Please Login");
     }
     if (error) {
