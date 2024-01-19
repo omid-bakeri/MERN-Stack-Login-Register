@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -11,7 +12,8 @@ const Register = () => {
   const [password, setPassword] = useState();
   // eslint-disable-next-line no-unused-vars
   const [result, setResult] = useState();
-  const [error, setError] = useState();
+  // eslint-disable-next-line no-unused-vars
+  // const [error, setError] = useState();
 
   const [data, setData] = useState();
 
@@ -23,8 +25,9 @@ const Register = () => {
     if (!username || !email || !password) {
       toast.error("Fill in all require Fields");
     }
+
     axios
-      .post("http://localhost:8000/api/register", {
+      .post("http://127.0.0.1:8001/api/register", {
         username,
         email,
         password,
@@ -32,10 +35,10 @@ const Register = () => {
       .then((result) => setData(result))
       .catch((err) => {
         console.log(err);
-        setError(err);
+        toast.error("The connection to the server is not established.");
       });
 
-    if (data && data.data.status == "SUCCESS") {
+    if (data && data.data.status == 200 && data.data.message == "Success") {
       toast.success("Successfully Created Your Accout Please Login");
       const setTime = async () => {
         await setTimeout(() => {
@@ -44,9 +47,9 @@ const Register = () => {
       };
       setTime();
     }
-    if (error) {
-      console.log(error);
-    }
+    // if (error) {
+    //   console.log(error);
+    // }
   };
 
   return (

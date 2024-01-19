@@ -2,14 +2,16 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const LoginComponent = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [data, setData] = useState();
   const [error, setError] = useState();
+  axios.defaults.withCredentials = true;
+
   const handleSubmitLogin = (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -17,7 +19,7 @@ const LoginComponent = () => {
     }
 
     axios
-      .post("http://localhost:8000/api/login", {
+      .post("http://127.0.0.1:8001/api/login", {
         email,
         password,
       })
@@ -27,14 +29,21 @@ const LoginComponent = () => {
         setError(err);
       });
 
-    if (data && data.data.status == "SUCCESS") {
-      toast.success("Successfully Created Your Accout Please Login");
-      const setTime = async () => {
-        await setTimeout(() => {
-          navigate("/Home");
-        }, 3000);
-      };
-      setTime();
+    if (data) {
+      console.log(data);
+    }
+
+    if (data && data.data.status == 200) {
+      toast.success("Successfully Login in Site Transfering ...");
+      // const setTime = async () => {
+      //   await setTimeout(() => {
+      //     navigate("/Home");
+      //   }, 3000);
+      // };
+      // setTime();
+    }
+    if (data && data.data.status == 404) {
+      toast.error(data.data.message);
     }
     if (error) {
       console.log(error);
