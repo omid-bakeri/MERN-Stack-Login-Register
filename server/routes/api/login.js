@@ -26,6 +26,10 @@ exports.postLogin = (req, res) => {
             message: "The Password is Incorrect",
           });
         }
+
+        if (error) {
+          return res.json({ message: "Error", status: 404 });
+        }
       });
     } else {
       return res.json({ status: 404, message: "No record existed" });

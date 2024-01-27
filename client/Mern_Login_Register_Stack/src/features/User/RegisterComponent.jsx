@@ -27,14 +27,14 @@ const Register = () => {
     }
 
     axios
-      .post("http://127.0.0.1:8001/api/register", {
+      .post("http://localhost:5001/api/register", {
         username,
         email,
         password,
       })
       .then((result) => setData(result))
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         toast.error("The connection to the server is not established.");
       });
 

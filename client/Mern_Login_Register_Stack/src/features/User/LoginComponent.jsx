@@ -19,13 +19,13 @@ const LoginComponent = () => {
     }
 
     axios
-      .post("http://127.0.0.1:8001/api/login", {
+      .post("http://127.0.0.1:5001/api/login", {
         email,
         password,
       })
       .then((result) => setData(result))
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         setError(err);
       });
 
